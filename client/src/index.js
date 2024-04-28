@@ -4,15 +4,18 @@ import App from './App';
 import UserStore from "./store/UserStore";
 import DeviceStore from "./store/DeviceStore";
 
-export const Context = createContext(null);
+export const Context = createContext();
 
 ReactDOM.render(
+	
 	<Context.Provider value={{
+
 		user: new UserStore(),
-		devices: new DeviceStore()
+		device: new DeviceStore(),
 	
 	}}>
 		<App />
 	</Context.Provider>,
 	document.getElementById('root')
+
 );

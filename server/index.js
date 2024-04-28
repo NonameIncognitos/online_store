@@ -9,14 +9,21 @@ const fileUpload = require('express-fileupload')
 const path = require('path')
 const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
+const bodyParser = require('body-parser');
 
 // IT IS PORT
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 const app = express();
+
 app.use(cors())
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
+app.use(bodyParser.json({ limit: "10mb" }));
+
+// Установка middleware для разбора данных формы
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use('/api', router)
 
